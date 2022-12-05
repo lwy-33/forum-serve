@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.forumserve.dao.userDao">
+    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <select id="seleAll" resultType="user">
+        select * from user;
+    </select>
+    <select id="getUser" parameterType="user" resultType="user">
+        select * from user
+        <include refid="whereSql"></include>
+    </select>
+
+    <sql id="whereSql">
+<!--&#45;&#45; 就不做密码的模糊查询了，因为密文不好查询-->
+        <where>
+            <if test="username!=null and username!='' and by2==1">
+<!--&#45;&#45; 这个是登陆用，用by2是考虑到like username 和 like %username%,后面用模糊查询应该也会用这个<where></where> ，而登录需要精确查询-->
+                and username like #{username}
+            </if>
+<!--&#45;&#45;模糊查询开始<-->
+            <if test="username!=null and username!='' and by2=='0'">
+                and username like "%"#{username}"%"
+            </if>
+            <if test="nickname!=null and nickname!=''">
+                and nickname like "%"#{nickname}"%"
+            </if>
+            <if test="sex!=null and sex!=''">
+                and sex like "%"#{sex}"%"
+            </if>
+            <if test="email!=null and email!=''">
+                and email like "%"#{email}"%"
+            </if>
+            <if test="userId!=null and userId!=''">
+            --可能会错(int不知道能不能用)
+                and email like "%"#{userId}"%"
+            </if>
+            <if test="bebrowseCount!=null and bebrowseCount!=''">
+                and bebrowseCount > #{bebrowseCount}
+            </if>
+            <if test="by3!=null and by3!=''">
+<!--            &lt表示<,<会报错-->
+                and bebrowseCount &lt; #{by3}
+            </if>
+            <if test="personal!=null and personal!=''">
+                and personal like "%"#{personal}"%"
+            </if>
+
+        </where>
+    </sql>
+
+    <select id="getAllUserByPage" resultType="user" parameterType="Integer">
+        select * from user limit #{curPage},#{pageSize}
+    </select>
+</mapper>
