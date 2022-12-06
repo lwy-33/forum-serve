@@ -2,4 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.forumserve.dao.thumbsDao">
     <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <insert id="addThumbs" parameterType="thumbs">
+        <!--sql调用原sql:INSERT into thumbs(userId,bethumbsId,bethumbsTypeId,thumbsTime) VALUES(2,4,0,'2022-11-02 15:37:28')-->
+        <!-- 注解：用户2给点赞类型为0（约定0为帖子，1为评论），下id为4的帖子点赞，时间为。。。。。。-->
+                INSERT into thumbs(userId,bethumbsId,bethumbsTypeId,thumbsTime) VALUES(#{userId},#{bethumbsId},#{bethumbsTypeId},#{thumbsTime})
+    </insert>
+    <select id="judgeThumbs" parameterType="thumbs" resultType="thumbs">
+        <!--
+        原sql：SELECT * from thumbs where userId=1 and bethumbsId=1 and bethumbsTypeId=1
+        注解：查询该userId有没有点过-->
+        SELECT * from thumbs where userId=#{userId} and bethumbsId=#{bethumbsId} and userId=#{userId}
+    </select>
+    <delete id="delThumbs" parameterType="Integer">
+        delete  from thumbs where userId=#{userId} and bethumbsId=#{bethumbsId}
+    </delete>
 </mapper>

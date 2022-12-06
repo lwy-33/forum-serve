@@ -10,4 +10,5 @@ public interface userDao {
     public List<user> getUser(user da);//用用户名获取用户信息\模糊查询
     public List<user> getAllUserByPage(@Param("curPage")Integer curPage,@Param("pageSize")Integer pageSize);
     public Integer getAllCount();
+    public user idGetUser(Integer id);
 }

@@ -1,5 +1,7 @@
 package com.example.forumserve.mybatis.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.xml.crypto.Data;
 
 public class title {
@@ -8,6 +10,7 @@ public class title {
     private String titleContent;
     private Integer userId;
     private Integer gameId;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss",timezone = "GMT+8")
     private Data releaseTime;
     private String commentCount;
     private Integer thumbsCount;

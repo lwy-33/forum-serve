@@ -1,6 +1,6 @@
 package com.example.forumserve.controller;
 
-import com.example.forumserve.mybatis.entity.returnMap;
+import com.example.forumserve.utils.returnMap;
 import com.example.forumserve.mybatis.entity.user;
 import com.example.forumserve.service.Service.userService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,4 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.forumserve.dao.noticeDao">
     <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <insert id="addNotice" parameterType="notice">
+        <!--
+        原sql=INSERT into notice(userId,beuserId,noticeContent,noticeTime) VALUES(1,2,"测试信息","2022-11-10 15:53:04")
+        注解：添加通知，有发起人，接受人，内容，时间
+        -->
+        INSERT into notice(userId,beuserId,noticeContent,noticeTime) VALUES(#{userId},#{beuserId},#{noticeContent},#{noticeTime})
+    </insert>
 </mapper>

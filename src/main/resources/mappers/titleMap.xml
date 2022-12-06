@@ -2,4 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.forumserve.dao.titleDao">
     <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <update id="incrementalThumbs" parameterType="Integer">
+        <!--
+        原sql：UPDATE title set thumbsCount=thumbsCount+1 where titleId=1
+        注解：帖子id=1的点赞计数器+1
+        -->
+        UPDATE title set thumbsCount=thumbsCount+1 where titleId=#{titleId}
+    </update>
+    <select id="idGetTitle" parameterType="Integer" resultType="title">
+        select * from title where titleId=#{titleId}
+<!-- 根据帖子id找到贴的全部 -->
+    </select>
+    <update id="DecrementThumbs" parameterType="Integer">
+        <!--
+        原sql：UPDATE title set thumbsCount=thumbsCount-1 where titleId=1
+        注解：帖子id=1的点赞计数器-1
+        -->
+        UPDATE title set thumbsCount=thumbsCount-1 where titleId=#{titleId}
+    </update>
 </mapper>

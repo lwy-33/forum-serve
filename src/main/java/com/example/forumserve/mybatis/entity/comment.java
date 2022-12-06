@@ -10,7 +10,7 @@ public class comment {
     private Integer becommentTypeId;
     private Integer becommentId;
     private String commentContent;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss",timezone = "GMT+8")
     private Date commentTime;
     private Integer thumbsCount;
     private String by2;

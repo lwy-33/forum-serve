@@ -1,5 +1,7 @@
 package com.example.forumserve.mybatis.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class notice {
@@ -7,6 +9,7 @@ public class notice {
     private Integer userId;
     private Integer beuserId;
     private String noticeContent;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss",timezone = "GMT+8")
     private Date noticeTime;
     private String by1;
     private String by2;

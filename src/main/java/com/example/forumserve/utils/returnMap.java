@@ -1,4 +1,4 @@
-package com.example.forumserve.mybatis.entity;
+package com.example.forumserve.utils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +8,7 @@ public class returnMap {
     static HashMap<String,Object> da=new HashMap<>();
     static{
         da.put("code",200);
-        da.put("tips","获取成功");
+        da.put("tips","操作成功");
     }
     public static HashMap<String, Object> returnMap(Object daObj) {
         da.put("dataobject",daObj);

@@ -6,7 +6,7 @@ public class fouow {
     private Integer fouowId;
     private Integer beuser;
     private Integer userId;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss",timezone = "GMT+8")
     private Integer fouwTime;
     private String by1;
     private String by2;

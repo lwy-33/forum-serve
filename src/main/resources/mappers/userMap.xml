@@ -55,4 +55,7 @@
     <select id="getAllCount" resultType="Integer">
         select count(*) from user
     </select>
+    <select id="idGetUser" parameterType="Integer" resultType="user">
+        select * from user where userId=#{id}
+    </select>
 </mapper>

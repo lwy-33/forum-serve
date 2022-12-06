@@ -2,4 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.forumserve.dao.commentDao">
     <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <update id="incrementalThumbs" parameterType="Integer">
+        <!--
+        原sql：UPDATE comment set thumbsCount=thumbsCount+1 where titleId=1
+        注解：评论id=1的点赞计数器+1
+        -->
+        UPDATE comment set thumbsCount=thumbsCount+1 where commentId=#{commentId}
+    </update>
+    <select id="idGetComment" parameterType="Integer" resultType="comment">
+        select * from comment where commentId=#{commentId}
+    </select>
+    <update id="DecrementThumbs" parameterType="Integer">
+        <!--
+        原sql：UPDATE comment set thumbsCount=thumbsCount-1 where titleId=1
+        注解：评论id=1的点赞计数器+1
+        -->
+        UPDATE comment set thumbsCount=thumbsCount-1 where commentId=#{commentId}
+    </update>
 </mapper>

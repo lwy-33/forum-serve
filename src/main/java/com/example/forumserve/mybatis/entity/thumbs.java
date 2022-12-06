@@ -1,12 +1,15 @@
 package com.example.forumserve.mybatis.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class thumbs {
     private Integer thumbsId;
     private Integer userId;
-    private Integer bethumbsd;
+    private Integer bethumbsId;
     private Integer bethumbsTypeId;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss",timezone = "GMT+8")
     private Date thumbsTime;
     private String by1;
     private String by2;
@@ -17,7 +20,7 @@ public class thumbs {
         return "thumbs{" +
                 "thumbsId=" + thumbsId +
                 ", userId=" + userId +
-                ", bethumbsd=" + bethumbsd +
+                ", bethumbsId=" + bethumbsId +
                 ", bethumbsTypeId=" + bethumbsTypeId +
                 ", thumbsTime=" + thumbsTime +
                 ", by1='" + by1 + '\'' +
@@ -42,12 +45,12 @@ public class thumbs {
         this.userId = userId;
     }
 
-    public Integer getBethumbsd() {
-        return bethumbsd;
+    public Integer getbethumbsId() {
+        return bethumbsId;
     }
 
-    public void setBethumbsd(Integer bethumbsd) {
-        this.bethumbsd = bethumbsd;
+    public void setbethumbsId(Integer bethumbsId) {
+        this.bethumbsId = bethumbsId;
     }
 
     public Integer getBethumbsTypeId() {
@@ -90,10 +93,10 @@ public class thumbs {
         this.by3 = by3;
     }
 
-    public thumbs(Integer thumbsId, Integer userId, Integer bethumbsd, Integer bethumbsTypeId, Date thumbsTime, String by1, String by2, String by3) {
+    public thumbs(Integer thumbsId, Integer userId, Integer bethumbsId, Integer bethumbsTypeId, Date thumbsTime, String by1, String by2, String by3) {
         this.thumbsId = thumbsId;
         this.userId = userId;
-        this.bethumbsd = bethumbsd;
+        this.bethumbsId = bethumbsId;
         this.bethumbsTypeId = bethumbsTypeId;
         this.thumbsTime = thumbsTime;
         this.by1 = by1;
