@@ -51,4 +51,8 @@
     <select id="getAllUserByPage" resultType="user" parameterType="Integer">
         select * from user limit #{curPage},#{pageSize}
     </select>
+
+    <select id="getAllCount" resultType="Integer">
+        select count(*) from user
+    </select>
 </mapper>

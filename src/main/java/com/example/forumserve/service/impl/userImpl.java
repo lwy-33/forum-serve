@@ -42,4 +42,7 @@ public class userImpl implements userService {
         return userAut.getAllUserByPage(curPage,pageSize);
     }
 
+    @Override
+    public Integer getAllCount() {return userAut.getAllCount();}
+
 }

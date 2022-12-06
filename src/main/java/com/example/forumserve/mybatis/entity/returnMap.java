@@ -11,7 +11,7 @@ public class returnMap {
         da.put("tips","获取成功");
     }
     public static HashMap<String, Object> returnMap(Object daObj) {
-        da.put("dataObject",daObj);
+        da.put("dataobject",daObj);
         return da;
     }
 

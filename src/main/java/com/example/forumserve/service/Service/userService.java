@@ -13,4 +13,5 @@ public interface userService {
     public List<user> seleAll();
     public user PasswordVerification(user da) throws NoSuchAlgorithmException;
     public List<user> getAllUserByPage(Integer curPage, Integer pageSize);
+    public Integer getAllCount();
 }

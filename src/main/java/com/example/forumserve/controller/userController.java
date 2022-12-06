@@ -27,4 +27,25 @@ public class userController {
     public HashMap<String,Object> PasswordVerification(@RequestBody user da) throws NoSuchAlgorithmException {
         return returnMap.returnMap(userAut.PasswordVerification(da));
     }
+
+    @GetMapping("/getAllUserByPage")
+    public Map<String,Object> getAllUserByPage(@RequestParam(value = "curPage")Integer curPage,
+                                               @RequestParam(value = "pageSize")Integer pageSize){
+        Map<String,Object> map=new HashMap<>();
+        List<user> userList=userAut.getAllUserByPage((curPage-1)*pageSize, pageSize);
+        if(userList!=null && userList.size()>0){
+            map.put("code",200);
+            map.put("msg","获取数据成功");
+            map.put("dataobject",userList);
+        }else{
+            map.put("code",400);
+            map.put("msg","获取数据成功");
+        }
+        return  map;
+    }
+
+    @GetMapping("/getAllCount")
+    public Map<String,Object> getAllCount(){
+        return new returnMap().returnMap(userAut.getAllCount());
+    }
 }
