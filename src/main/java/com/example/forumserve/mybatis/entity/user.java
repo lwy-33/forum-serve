@@ -21,27 +21,27 @@ public class user {
     private String by2;
     private Integer by3;
     private String by4;
-
-    @Override
-    public String toString() {
-        return "user{" +
-                "userId=" + userId +
-                ", password='" + password + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", sex='" + sex + '\'' +
-                ", email='" + email + '\'' +
-                ", roleId=" + roleId +
-                ", userImage='" + userImage + '\'' +
-                ", bebrowseCount=" + bebrowseCount +
-                ", personal='" + personal + '\'' +
-                ", username='" + username + '\'' +
-                ", by2='" + by2 + '\'' +
-                ", by3='" + by3 + '\'' +
-                ", by4='" + by4 + '\'' +
-                '}';
-    }
+    private role roleInfo;
 
     public user() {
+
+    }
+
+    public user(Integer userId, String password, String nickname, String sex, String email, Integer roleId, String userImage, Integer bebrowseCount, String personal, String username, String by2, Integer by3, String by4, role roleInfo) {
+        this.userId = userId;
+        this.password = password;
+        this.nickname = nickname;
+        this.sex = sex;
+        this.email = email;
+        this.roleId = roleId;
+        this.userImage = userImage;
+        this.bebrowseCount = bebrowseCount;
+        this.personal = personal;
+        this.username = username;
+        this.by2 = by2;
+        this.by3 = by3;
+        this.by4 = by4;
+        this.roleInfo = roleInfo;
     }
 
     public Integer getUserId() {
@@ -148,19 +148,31 @@ public class user {
         this.by4 = by4;
     }
 
-    public user(Integer userId, String password, String nickname, String sex, String email, Integer roleId, String userImage, Integer bebrowseCount, String personal, String username, String by2, Integer by3, String by4) {
-        this.userId = userId;
-        this.password = password;
-        this.nickname = nickname;
-        this.sex = sex;
-        this.email = email;
-        this.roleId = roleId;
-        this.userImage = userImage;
-        this.bebrowseCount = bebrowseCount;
-        this.personal = personal;
-        this.username = username;
-        this.by2 = by2;
-        this.by3 = by3;
-        this.by4 = by4;
+    public role getRoleInfo() {
+        return roleInfo;
+    }
+
+    public void setRoleInfo(role roleInfo) {
+        this.roleInfo = roleInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "user{" +
+                "userId=" + userId +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", sex='" + sex + '\'' +
+                ", email='" + email + '\'' +
+                ", roleId=" + roleId +
+                ", userImage='" + userImage + '\'' +
+                ", bebrowseCount=" + bebrowseCount +
+                ", personal='" + personal + '\'' +
+                ", username='" + username + '\'' +
+                ", by2='" + by2 + '\'' +
+                ", by3=" + by3 +
+                ", by4='" + by4 + '\'' +
+                ", roleInfo=" + roleInfo +
+                '}';
     }
 }

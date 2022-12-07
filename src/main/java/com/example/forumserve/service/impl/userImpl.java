@@ -38,11 +38,22 @@ public class userImpl implements userService {
     }
 
     @Override
-    public List<user> getAllUserByPage(Integer curPage, Integer pageSize) {
-        return userAut.getAllUserByPage(curPage,pageSize);
+    public List<user> getAllUserByPage(Integer curPage, Integer pageSize,String username,String sex,String nickname) {
+        return userAut.getAllUserByPage(curPage,pageSize,username,sex,nickname);
     }
 
     @Override
     public Integer getAllCount() {return userAut.getAllCount();}
+
+    @Override
+    public List<user> getAllAdminByPage(Integer curPage, Integer pageSize) {
+        return userAut.getAllAdminByPage(curPage,pageSize);
+    }
+
+    @Override
+    public Integer getAllAdminCount() {return userAut.getAllAdminCount();}
+
+    @Override
+    public void delUserById(Integer userId) {userAut.delUserById(userId);}
 
 }

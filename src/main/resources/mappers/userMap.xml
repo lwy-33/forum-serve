@@ -21,11 +21,14 @@
             <if test="username!=null and username!='' and by2=='0'">
                 and username like "%"#{username}"%"
             </if>
+            <if test="username!=null and username!=''">
+                and username like "%"#{username}"%"
+            </if>
             <if test="nickname!=null and nickname!=''">
                 and nickname like "%"#{nickname}"%"
             </if>
             <if test="sex!=null and sex!=''">
-                and sex like "%"#{sex}"%"
+                and sex = #{sex}
             </if>
             <if test="email!=null and email!=''">
                 and email like "%"#{email}"%"
@@ -48,14 +51,53 @@
         </where>
     </sql>
 
-    <select id="getAllUserByPage" resultType="user" parameterType="Integer">
-        select * from user limit #{curPage},#{pageSize}
+    <resultMap id="userResultMap" type="user">
+        <id property="userId" column="userId"/>
+        <result property="password" column="password"/>
+        <result property="nickname" column="nickname"/>
+        <result property="sex" column="sex"/>
+        <result property="email" column="email"/>
+        <result property="roleId" column="roleId"/>
+        <result property="imagePath" column="imagePath"/>
+        <result property="bebrowseCount" column="bebrowseCount"/>
+        <result property="personal" column="personal"/>
+        <result property="username" column="username"/>
+        <association property="roleInfo" column="roleId" select="com.example.forumserve.dao.roleDao.findById"/>
+    </resultMap>
+
+    <select id="getAllUserByPage" resultMap="userResultMap" parameterType="Integer">
+        select * from user
+        <where>
+            <if test="username!=null and username!=''">
+                and username like "%"#{username}"%"
+            </if>
+            <if test="nickname!=null and nickname!=''">
+                and nickname like "%"#{nickname}"%"
+            </if>
+            <if test="sex!=null and sex!=''">
+                and sex = #{sex}
+            </if>
+            and roleId>1
+        </where>
+         limit #{curPage},#{pageSize}
     </select>
 
     <select id="getAllCount" resultType="Integer">
-        select count(*) from user
+        select count(*) from user where roleId>1
     </select>
     <select id="idGetUser" parameterType="Integer" resultType="user">
         select * from user where userId=#{id}
     </select>
+
+    <select id="getAllAdminByPage" resultMap="userResultMap" parameterType="Integer">
+        select * from user where roleId=0 or roleId=1 limit #{curPage},#{pageSize}
+    </select>
+
+    <select id="getAllAdminCount" resultType="Integer">
+        select count(*) from user where roleId=0 or roleId=1
+    </select>
+
+    <delete id="delUserById" parameterType="Integer">
+        delete from user where userId=#{userId}
+    </delete>
 </mapper>

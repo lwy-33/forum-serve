@@ -12,6 +12,9 @@ import java.util.List;
 public interface userService {
     public List<user> seleAll();
     public user PasswordVerification(user da) throws NoSuchAlgorithmException;
-    public List<user> getAllUserByPage(Integer curPage, Integer pageSize);
+    public List<user> getAllUserByPage(Integer curPage, Integer pageSize,String username,String sex,String nickname);
     public Integer getAllCount();
+    public List<user> getAllAdminByPage(Integer curPage, Integer pageSize);
+    public Integer getAllAdminCount();
+    public void delUserById(Integer userId);
 }
