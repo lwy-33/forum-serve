@@ -56,4 +56,19 @@ public class userImpl implements userService {
     @Override
     public void delUserById(Integer userId) {userAut.delUserById(userId);}
 
+    @Override
+    public void addUser(user user) throws NoSuchAlgorithmException {
+        md5Util md5=new md5Util();
+        user.setPassword(md5.md5Util(user.getUsername(),user.getPassword()));
+        userAut.addUser(user);
+    }
+
+    @Override
+    public void updateUser(user user) throws NoSuchAlgorithmException {
+        md5Util md5=new md5Util();
+        user.setPassword(md5.md5Util(user.getUsername(),user.getPassword()));
+        userAut.updateUser(user);
+    }
+
+
 }

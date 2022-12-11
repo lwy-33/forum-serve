@@ -100,4 +100,12 @@
     <delete id="delUserById" parameterType="Integer">
         delete from user where userId=#{userId}
     </delete>
+
+    <insert id="addUser" parameterType="user">
+        insert into user(password,nickname,sex,email,roleId,userImage,bebrowseCount,personal,username) values(#{password},#{nickname},#{sex},#{email},#{roleId},#{userImage},#{bebrowseCount},#{personal},#{username})
+    </insert>
+
+    <update id="updateUser" parameterType="user">
+        update user set password=#{password},nickname=#{nickname},sex=#{sex},email=#{email},roleId=#{roleId},userImage=#{userImage},bebrowseCount=#{bebrowseCount},personal=#{personal},username=#{username} where userId=#{userId}
+    </update>
 </mapper>

@@ -18,4 +18,6 @@ public interface userDao {
     public Integer getAllAdminCount();
     public void delUserById(Integer userId);
     public user idGetUser(Integer id);
+    public void addUser(user user);
+    public void updateUser(user user);
 }

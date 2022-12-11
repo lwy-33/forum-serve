@@ -1,11 +1,17 @@
 package com.example.forumserve.controller;
 
+import cn.hutool.core.io.FileUtil;
 import com.example.forumserve.utils.returnMap;
 import com.example.forumserve.mybatis.entity.user;
 import com.example.forumserve.service.Service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
@@ -79,6 +85,34 @@ public class userController {
         userAut.delUserById(userId);
         map.put("code",200);
         map.put("msg","删除成功");
+        return map;
+    }
+
+    @GetMapping("/file/{fileUUID}")
+    public void download(@PathVariable String fileUUID, HttpServletResponse response) throws IOException, IOException {
+        //根据文件的位翼标识码获取文件
+        File uploadFile = new File("D:\\userImage\\userImage\\" + fileUUID);
+        ServletOutputStream os = response.getOutputStream();
+        response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileUUID, "UTF-8"));
+        response.setContentType("application/octet-stream");
+
+        //读取文件的字节流
+        os.write(FileUtil.readBytes(uploadFile));
+        os.flush();
+        os.close();
+    }
+    @PostMapping("/editUser")
+    public Map<String,Object> editUser(@RequestBody user user) throws NoSuchAlgorithmException {
+        Map<String,Object> map=new HashMap<>();
+        if(user.getUserId()!=null){
+            userAut.updateUser(user);
+            map.put("code",200);
+            map.put("msg","修改用户信息成功");
+        }else {
+            userAut.addUser(user);
+            map.put("code",200);
+            map.put("msg","添加用户信息成功");
+        }
         return map;
     }
 }

@@ -5,4 +5,12 @@
     <select id="findById" parameterType="Integer" resultType="role">
         select * from role where roleId=#{roleId}
     </select>
+
+    <select id="findAll" resultType="role">
+        select * from role where roleId=3 or roleId=5
+    </select>
+
+    <select id="_findAll" resultType="role">
+        select * from role where roleId=0 or roleId=1
+    </select>
 </mapper>

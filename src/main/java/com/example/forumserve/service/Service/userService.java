@@ -17,4 +17,6 @@ public interface userService {
     public List<user> getAllAdminByPage(Integer curPage, Integer pageSize);
     public Integer getAllAdminCount();
     public void delUserById(Integer userId);
+    public void addUser(user user) throws NoSuchAlgorithmException;
+    public void updateUser(user user) throws NoSuchAlgorithmException;
 }
