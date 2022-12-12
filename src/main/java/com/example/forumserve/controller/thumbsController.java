@@ -30,7 +30,7 @@ public class thumbsController {
             //取消他的点赞，并计数器--，通知
             thumbsservice.delThumbs(da);
         }
-        return returnMap.returnMap(null);
+        return new returnMap().returnMap(200,null);
 
     }
 

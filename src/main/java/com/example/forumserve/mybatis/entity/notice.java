@@ -11,7 +11,7 @@ public class notice {
     private String noticeContent;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss",timezone = "GMT+8")
     private Date noticeTime;
-    private String by1;
+    private Integer by1;//点入次数，用来主页面显示几条未读（0为未读，进一次++）
     private String by2;
     private String  by3;
 
@@ -69,11 +69,11 @@ public class notice {
         this.noticeTime = noticeTime;
     }
 
-    public String getBy1() {
+    public Integer getBy1() {
         return by1;
     }
 
-    public void setBy1(String by1) {
+    public void setBy1(Integer by1) {
         this.by1 = by1;
     }
 
@@ -93,7 +93,7 @@ public class notice {
         this.by3 = by3;
     }
 
-    public notice(Integer noticeId, Integer userId, Integer beuserId, String noticeContent, Date noticeTime, String by1, String by2, String by3) {
+    public notice(Integer noticeId, Integer userId, Integer beuserId, String noticeContent, Date noticeTime, Integer by1, String by2, String by3) {
         this.noticeId = noticeId;
         this.userId = userId;
         this.beuserId = beuserId;

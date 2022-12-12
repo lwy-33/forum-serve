@@ -20,4 +20,5 @@
         -->
         UPDATE title set thumbsCount=thumbsCount-1 where titleId=#{titleId}
     </update>
+
 </mapper>

@@ -3,6 +3,7 @@ package com.example.forumserve.mybatis.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.xml.crypto.Data;
+import java.util.Date;
 
 public class title {
     private Integer titleId;
@@ -11,8 +12,8 @@ public class title {
     private Integer userId;
     private Integer gameId;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss",timezone = "GMT+8")
-    private Data releaseTime;
-    private String commentCount;
+    private Date releaseTime;
+    private Integer commentCount;
     private Integer thumbsCount;
     private Integer by3;
 
@@ -71,19 +72,19 @@ public class title {
         this.gameId = gameId;
     }
 
-    public Data getReleaseTime() {
+    public Date getReleaseTime() {
         return releaseTime;
     }
 
-    public void setReleaseTime(Data releaseTime) {
+    public void setReleaseTime(Date releaseTime) {
         this.releaseTime = releaseTime;
     }
 
-    public String getCommentCount() {
+    public Integer getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentCount(String commentCount) {
+    public void setCommentCount(Integer commentCount) {
         this.commentCount = commentCount;
     }
 
@@ -106,7 +107,7 @@ public class title {
     public title() {
     }
 
-    public title(Integer titleId, String titleName, String titleContent, Integer userId, Integer gameId, Data releaseTime, String commentCount, Integer thumbsCount, Integer by3) {
+    public title(Integer titleId, String titleName, String titleContent, Integer userId, Integer gameId, Date releaseTime, Integer commentCount, Integer thumbsCount, Integer by3) {
         this.titleId = titleId;
         this.titleName = titleName;
         this.titleContent = titleContent;

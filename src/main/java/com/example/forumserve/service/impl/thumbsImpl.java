@@ -36,7 +36,7 @@ public class thumbsImpl implements thumbsService {
          */
         thumbsdao.addThumbs(da);
         //给被点的用户发通知(根据帖子或评论id找人，方便通知)
-        notice no=new notice(-1,da.getUserId(),-1,null,da.getThumbsTime(),"","","");
+        notice no=new notice(-1,da.getUserId(),-1,null,da.getThumbsTime(),0,"","");
         if(da.getBethumbsTypeId()==0){//帖子点赞
              //根据帖子id找到发布的全部信息，在全部信息中提出发布者
             no.setBeuserId(titledao.idGetTitle(da.getbethumbsId()).getUserId());
@@ -72,7 +72,7 @@ public class thumbsImpl implements thumbsService {
          */
         thumbsdao.delThumbs(da);
         //给被点的用户发通知(根据帖子或评论id找人，方便通知)
-        notice no=new notice(-1,da.getUserId(),-1,null,da.getThumbsTime(),"","","");
+        notice no=new notice(-1,da.getUserId(),-1,null,da.getThumbsTime(),0,"","");
         if(da.getBethumbsTypeId()==0){//帖子点赞
             //根据帖子id找到发布的全部信息，在全部信息中提出发布者
             no.setBeuserId(titledao.idGetTitle(da.getbethumbsId()).getUserId());

@@ -26,14 +26,8 @@ public class userImpl implements userService {
         md5Util md5=new md5Util();
         //通过MD5修改密码
         da.setPassword(md5.md5Util(da.getUsername(),da.getPassword()));
-        System.out.println(da.toString());
-        user data=userAut.getUser(da).get(0);//DAO读取sql数据返回
-        if(data.getPassword().equals(da.getPassword())){
-            //密码正确
-            data.setPassword("0");
-        }else{
-            data.setPassword("1");
-        }
+//        System.out.println(da.toString());
+        user data=userAut.getUser(da);//DAO读取sql数据返回
         return data;
     }
 

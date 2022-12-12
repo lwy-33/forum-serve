@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.forumserve.dao.showDao">
+    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <select id="showAllGame" resultType="game">
+        select * from game
+    </select>
+
+    <resultMap id="ReturnShow" type="showTitleEntity">
+        <result property="whetherToPayAttention" column="whetherToPayAttention"/>
+        <result property="whetherToCollect" column="whetherToCollect"/>
+        <result property="likeOrNot" column="likeOrNot"/>
+        <association property="title" javaType="title">
+            <result  property="titleId" column="titleId"/>
+            <result property="userId" column="userId"/>
+            <result property="titleName" column="titleName"/>
+            <result property="by3" column="by3"/>
+            <result property="releaseTime" column="releaseTime"/>
+            <result property="commentCount" column="commentCount"/>
+            <result property="thumbsCount" column="thumbsCount"/>
+        </association>
+        <association property="user" javaType="user">
+            <result property="userImage" column="userImage"/>
+            <result property="nickname" column="nickname"/>
+        </association>
+
+
+    </resultMap>
+
+    <select id="TitleIdByTitle" resultMap="ReturnShow" parameterType="Integer">
+<!--
+原sql（可用）
+select t.titleId,t.userId,t.titleName,t.by3,t.releaseTime,t.commentCount, t.thumbsCount,u.nickname,u.userImage,
+COUNT(f.fouowId) as whetherToPayAttention,COUNT(c.couectId) as whetherToCollect,COUNT(th.thumbsId) as likeOrNot
+from (title as t,user as u)
+LEFT JOIN fouow  f on f.userId=3 and f.beuser=t.userId
+LEFT JOIN couect  c on c.userId=3 and c.titleId=t.titleId
+LEFT JOIN thumbs  th on th.userId=3 and bethumbsTypeId=0 and th.bethumbsId=t.titleId
+where t.gameId=1 GROUP BY t.titleId
+-->
+        select t.titleId,t.userId,t.titleName,t.by3,t.releaseTime,t.commentCount, t.thumbsCount,u.nickname,u.userImage,
+               COUNT(f.fouowId) as whetherToPayAttention,COUNT(c.couectId) as whetherToCollect,COUNT(th.thumbsId) as likeOrNot
+                from (title as t,user as u)
+                 LEFT JOIN fouow  f on f.userId=#{userId} and f.beuser=t.userId
+                 LEFT JOIN couect  c on c.userId=#{userId} and c.titleId=t.titleId
+                 LEFT JOIN thumbs  th on th.userId=#{userId} and bethumbsTypeId=0 and th.bethumbsId=t.titleId
+        where t.gameId=#{gameId} GROUP BY t.titleId
+    </select>
+
+    <resultMap id="recommendedMap" type="recommendedUser">
+        <id property="whetherToPayAttention" column="whetherToPayAttention"/>
+        <association property="user" javaType="user">
+            <id property="userId" column="userId"/>
+            <result property="nickname" column="nickname"/>
+            <result property="personal" column="personal"/>
+        </association>
+    </resultMap>
+
+<!--    <select id="showRecommendedUsers" resultMap="recommendedMap" parameterType="Integer">-->
+<!--        SELECT a.userId,a.nickname,a.personal,COUNT(f.userId) as whetherToPayAttention FROM `user` a-->
+<!--            left join (SELECT ROUND(RAND() * ((SELECT MAX(userId) FROM `user`)-(SELECT MIN(userId) FROM `user`))+(SELECT MIN(userId) FROM `user`)) AS userId) AS b on a.userId >= b.userId-->
+<!--            LEFT JOIN fouow  f on f.userId=#{userId} and f.beuser=a.userId-->
+<!--            where a.userId!=#{userId} and a.roleId=1-->
+<!--            GROUP BY a.userId ORDER BY b.userId LIMIT 7-->
+
+<!--        &lt;!&ndash;-->
+<!--        原sql，实现随机抽取7条，并且展示是否与当前用户有关注（by2字段）,并且抽不到当前用户和管理员账号-->
+<!--        SELECT a.userId,a.nickname,a.personal,COUNT(f.userId) as by2 FROM `user` a-->
+<!--        left join (SELECT ROUND(RAND() * ((SELECT MAX(userId) FROM `user`)-(SELECT MIN(userId) FROM `user`))+(SELECT MIN(userId) FROM `user`)) AS userId) AS b on a.userId >= b.userId-->
+<!--        LEFT JOIN fouow  f on f.userId=3 and f.beuser=a.userId-->
+<!--        where a.userId!=3 and a.roleId=1-->
+<!--        GROUP BY a.userId ORDER BY b.userId LIMIT 7-->
+
+<!--        &ndash;&gt;-->
+
+<!--    </select>-->
+
+    <select id="showRecommendedUsers" resultType="user" parameterType="Integer">
+        SELECT a.userId,a.nickname,a.personal,a.userImage,COUNT(f.userId) as by3 FROM `user` a
+        left join (SELECT ROUND(RAND() * ((SELECT MAX(userId) FROM `user`)-(SELECT MIN(userId) FROM `user`))+(SELECT MIN(userId) FROM `user`)) AS userId) AS b on a.userId >= b.userId
+        LEFT JOIN fouow  f on f.userId=#{userId} and f.beuser=a.userId
+        where a.userId!=#{userId} and a.roleId=3
+        GROUP BY a.userId ORDER BY b.userId LIMIT 7
+
+        <!--
+        原sql，实现随机抽取7条，并且展示是否与当前用户有关注（by2字段）,并且抽不到当前用户和管理员账号
+        SELECT a.userId,a.nickname,a.personal,COUNT(f.userId) as by2 FROM `user` a
+        left join (SELECT ROUND(RAND() * ((SELECT MAX(userId) FROM `user`)-(SELECT MIN(userId) FROM `user`))+(SELECT MIN(userId) FROM `user`)) AS userId) AS b on a.userId >= b.userId
+        LEFT JOIN fouow  f on f.userId=3 and f.beuser=a.userId
+        where a.userId!=3 and a.roleId=1
+        GROUP BY a.userId ORDER BY b.userId LIMIT 7
+
+        -->
+
+    </select>
+
+</mapper>

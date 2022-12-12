@@ -17,13 +17,16 @@
 <!--&#45;&#45; 这个是登陆用，用by2是考虑到like username 和 like %username%,后面用模糊查询应该也会用这个<where></where> ，而登录需要精确查询-->
                 and username like #{username}
             </if>
+            <if test="password!=null and password!='' and by2==1">
+                <!--&#45;&#45; 这个是登陆用，用by2是考虑到like username 和 like %username%,后面用模糊查询应该也会用这个<where></where> ，而登录需要精确查询-->
+                and password like #{password}
+            </if>
+
 <!--&#45;&#45;模糊查询开始<-->
             <if test="username!=null and username!='' and by2=='0'">
                 and username like "%"#{username}"%"
             </if>
-            <if test="username!=null and username!=''">
-                and username like "%"#{username}"%"
-            </if>
+
             <if test="nickname!=null and nickname!=''">
                 and nickname like "%"#{nickname}"%"
             </if>

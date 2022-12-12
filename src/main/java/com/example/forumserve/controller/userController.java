@@ -27,11 +27,11 @@ public class userController {
 
     @GetMapping("seleAll")
     public HashMap<String, Object> seleAll(){//获取全部用户数据
-        return new returnMap().returnMap(userAut.seleAll());
+        return new returnMap().returnMap(200,userAut.seleAll());
     }
     @PostMapping("PasswordVerification")
     public HashMap<String,Object> PasswordVerification(@RequestBody user da) throws NoSuchAlgorithmException {
-        return returnMap.returnMap(userAut.PasswordVerification(da));
+        return new returnMap().returnMap(200,userAut.PasswordVerification(da));
     }
 
     @GetMapping("/getAllUserByPage")
