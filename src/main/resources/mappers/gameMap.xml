@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.forumserve.dao.gameDao">
-    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+<!--    namespace根据自己需要创建的的mapper的路径和名称填写-->
+<!--    <resultMap id="gameResultMap" type="game">-->
+<!--        <id property="gameId" column="gameId"/>-->
+<!--        <result property="gameName" column="gameName"/>-->
+<!--        <result property="gameTypeId" column="gameTypeId"/>-->
+<!--        <result property="gameIcon" column="gameIcon"/>-->
+<!--        <association property="gameType" column="gameTypeId" select="com.example.forumserve.dao.gametypeDao.findById"/>-->
+<!--    </resultMap>-->
+<!--    <select id="findAllGame" resultMap="gameResultMap" parameterType="Integer">-->
+    <select id="findAllGame" resultType="game" parameterType="Integer">
+        select game.gameId,game.gameName,game.gameTypeId,game.gameIcon,gametype.typeName as by3 from game,gametype where game.gameTypeId=gametype.typeId
+--         select * from game
+    </select>
+
+    <select id="findByVague" resultType="game" parameterType="String">
+        select game.gameId,game.gameName,game.gameTypeId,game.gameIcon,gametype.typeName as by3 from game,gametype where game.gameTypeId=gametype.typeId
+
+        <if test="gameName!=null and gameName!=''">
+            and gameName like "%"#{gameName}"%"
+        </if>
+        <if test="gameTypeId!=null and gameTypeId!=''">
+            and gameTypeId = #{gameTypeId}
+        </if>
+
+    </select>
+
+    <delete id="delGameById" parameterType="Integer">
+        delete from game where gameId=#{gameId}
+    </delete>
+
+    <insert id="addGame" parameterType="game">
+        insert into game(gameName,gameTypeId,gameIcon) values(#{gameName},#{gameTypeId},#{gameIcon})
+    </insert>
+
+    <update id="updateGame" parameterType="game">
+        update game set gameName=#{gameName},gameTypeId=#{gameTypeId},gameIcon=#{gameIcon} where gameId=#{gameId}
+    </update>
+
+    <delete id="delGameByIds" parameterType="Integer">
+        delete from game where gameId in
+        <foreach item="gameIds" collection="list" index="index" open="("
+                 separator="," close=")">
+            #{gameIds}
+        </foreach>
+    </delete>
 </mapper>
