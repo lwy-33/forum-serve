@@ -60,6 +60,12 @@ public class returnMap {
         }else if( code == 300){
             da.put("code",code);
             da.put("message","用户名或密码错误");
+        }else if( code == 204){
+            da.put("code" ,code);
+            da.put("message","收藏取消成功！");
+        }else if( code == 206){
+            da.put("code" ,code);
+            da.put("message","收藏成功！");
         }
         return da;
     }

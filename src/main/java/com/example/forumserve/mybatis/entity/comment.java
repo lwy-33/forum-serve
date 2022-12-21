@@ -13,6 +13,7 @@ public class comment {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss",timezone = "GMT+8")
     private Date commentTime;
     private Integer thumbsCount;
+    private Integer by1;
     private String by2;
     private String by3;
 
@@ -26,6 +27,7 @@ public class comment {
                 ", commentContent='" + commentContent + '\'' +
                 ", commentTime=" + commentTime +
                 ", thumbsCount=" + thumbsCount +
+                ", by1=" + by1 +
                 ", by2='" + by2 + '\'' +
                 ", by3='" + by3 + '\'' +
                 '}';
@@ -87,6 +89,14 @@ public class comment {
         this.thumbsCount = thumbsCount;
     }
 
+    public Integer getBy1() {
+        return by1;
+    }
+
+    public void setBy1(Integer by1) {
+        this.by1 = by1;
+    }
+
     public String getBy2() {
         return by2;
     }
@@ -103,10 +113,7 @@ public class comment {
         this.by3 = by3;
     }
 
-    public comment() {
-    }
-
-    public comment(Integer commentId, Integer userId, Integer becommentTypeId, Integer becommentId, String commentContent, Date commentTime, Integer thumbsCount, String by2, String by3) {
+    public comment(Integer commentId, Integer userId, Integer becommentTypeId, Integer becommentId, String commentContent, Date commentTime, Integer thumbsCount, Integer by1, String by2, String by3) {
         this.commentId = commentId;
         this.userId = userId;
         this.becommentTypeId = becommentTypeId;
@@ -114,7 +121,11 @@ public class comment {
         this.commentContent = commentContent;
         this.commentTime = commentTime;
         this.thumbsCount = thumbsCount;
+        this.by1 = by1;
         this.by2 = by2;
         this.by3 = by3;
+    }
+
+    public comment() {
     }
 }

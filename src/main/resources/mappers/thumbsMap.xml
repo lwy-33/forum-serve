@@ -4,7 +4,7 @@
     <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
     <insert id="addThumbs" parameterType="thumbs">
         <!--sql调用原sql:INSERT into thumbs(userId,bethumbsId,bethumbsTypeId,thumbsTime) VALUES(2,4,0,'2022-11-02 15:37:28')-->
-        <!-- 注解：用户2给点赞类型为0（约定0为帖子，1为评论），下id为4的帖子点赞，时间为。。。。。。-->
+        <!-- 注解：用户2给点赞类型为0（约定0为帖子，1为评论），下id为4的帖子点赞，时间为当前时间DateTime.Now-->
                 INSERT into thumbs(userId,bethumbsId,bethumbsTypeId,thumbsTime) VALUES(#{userId},#{bethumbsId},#{bethumbsTypeId},#{thumbsTime})
     </insert>
     <select id="judgeThumbs" parameterType="thumbs" resultType="thumbs">

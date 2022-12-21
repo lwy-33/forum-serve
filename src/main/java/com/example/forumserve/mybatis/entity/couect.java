@@ -8,7 +8,7 @@ public class couect {
     private Integer couectId;
     private Integer userId;
     private Integer titleId;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date couectTime;
     private String by1;
     private String by2;

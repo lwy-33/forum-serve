@@ -19,4 +19,5 @@ public interface userService {
     public void delUserById(Integer userId);
     public void addUser(user user) throws NoSuchAlgorithmException;
     public void updateUser(user user) throws NoSuchAlgorithmException;
+    public user userByUserId(Integer userId);
 }

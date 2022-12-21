@@ -9,4 +9,8 @@
         -->
         INSERT into notice(userId,beuserId,noticeContent,noticeTime) VALUES(#{userId},#{beuserId},#{noticeContent},#{noticeTime})
     </insert>
+    <select id="loadNotification" resultType="Integer" parameterType="Integer">
+        select COUNT(*) as unread from notice where beuserId=#{userId} and by1=0
+    </select>
+    
 </mapper>

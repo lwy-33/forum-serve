@@ -19,4 +19,38 @@
         -->
         UPDATE comment set thumbsCount=thumbsCount-1 where commentId=#{commentId}
     </update>
+
+    <select id="GetCommentById" parameterType="Integer" resultType="comment">
+<!--没有是否点赞属性1.0版，
+        select c.commentId,c.userId,c.becommentTypeId,c.becommentId,c.commentContent,c.commentTime,c.thumbsCount,
+               u.nickname as by2,u.userImage as by3 from comment as c,user as u where u.userId=c.userId and becommentId=#{becommentId} and becommentTypeId=#{becommentTypeId}
+-->
+
+<!--
+select c.commentId,c.userId,c.becommentTypeId,c.becommentId,c.commentContent,c.commentTime,c.thumbsCount,u.nickname as by2,u.userImage as by3,count(th.thumbsId) as by1 from comment as c,user as u
+LEFT JOIN thumbs th on th.userId=4 and th.bethumbsId=u.userId and th.bethumbsTypeId=0
+where u.userId=c.userId and becommentId=4 and becommentTypeId=0 GROUP BY c.commentId
+-->
+        <!--2.0,上一个点赞逻辑（by1）不对
+        select c.commentId,c.userId,c.becommentTypeId,c.becommentId,c.commentContent,c.commentTime,c.thumbsCount,u.nickname as by2,u.userImage as by3,count(th.thumbsId) as by1 from comment as c,user as u
+        LEFT JOIN thumbs th on th.bethumbsId=u.userId and th.bethumbsTypeId=0
+        where u.userId=c.userId and th.userId=#{userId} and becommentId=#{becommentId} and becommentTypeId=#{becommentTypeId} GROUP BY c.commentId
+        -->
+        select c.commentId,c.userId,c.becommentTypeId,c.becommentId,c.commentContent,c.commentTime,c.thumbsCount,
+        u.nickname as by2,u.userImage as by3,count(th.thumbsId) as by1
+        from (comment as c,user as u)
+        LEFT JOIN thumbs  th on th.userId=#{userId} and bethumbsTypeId=1 and th.bethumbsId=c.commentId
+        where u.userId=c.userId and c.becommentId=#{becommentId} and becommentTypeId=#{becommentTypeId} GROUP BY c.commentId ORDER BY c.commentTime desc
+
+
+    </select>
+    <insert id="addComment" parameterType="comment">
+        INSERT INTO `forundb`.`comment`(`userId`, `becommentTypeId`, `becommentId`, `commentContent`, `commentTime`, `thumbsCount`) VALUES ( #{userId}, #{becommentTypeId}, #{becommentId}, #{commentContent}, #{commentTime}, #{thumbsCount});
+
+    </insert>
+
+    <select id="acquireReceivingUser" parameterType="Integer" resultType="Integer">
+        SELECT userId from comment as a where a.commentId=#{becommentId}
+    </select>
+
 </mapper>

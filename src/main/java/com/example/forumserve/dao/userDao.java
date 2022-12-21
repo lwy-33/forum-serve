@@ -20,4 +20,5 @@ public interface userDao {
     public user idGetUser(Integer id);
     public void addUser(user user);
     public void updateUser(user user);
+    public user userByUserId(Integer userId);
 }

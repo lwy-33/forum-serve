@@ -55,7 +55,7 @@ public class userController {
 
     @GetMapping("/getAllCount")
     public Map<String,Object> getAllCount(){
-        return new returnMap().returnMap(userAut.getAllCount());
+        return new returnMap().returnMap(200,userAut.getAllCount());
     }
 
     @GetMapping("/getAllAdminByPage")
@@ -76,7 +76,7 @@ public class userController {
 
     @GetMapping("/getAllAdminCount")
     public Map<String,Object> getAllAdminCount(){
-        return new returnMap().returnMap(userAut.getAllAdminCount());
+        return new returnMap().returnMap(200,userAut.getAllAdminCount());
     }
 
     @GetMapping("/delUserById")
@@ -115,4 +115,10 @@ public class userController {
         }
         return map;
     }
+    @GetMapping("userByUserId")
+    public Map<String,Object> userByUserId(Integer userId){
+//        根据用户id获取用户信息
+        return new returnMap().returnMap(200,userAut.userByUserId(userId));
+    }
+
 }

@@ -19,7 +19,7 @@ public class gametypeController {
     private gametypeService gametypeAut;
     @GetMapping("/findAllGameType")
     public Map<String,Object> findAllGameType(){
-        return new returnMap().returnMap(gametypeAut.findAllGameType());
+        return new returnMap().returnMap(200,gametypeAut.findAllGameType());
     }
 
     @GetMapping("/delGameTypeById")
@@ -46,5 +46,5 @@ public class gametypeController {
     }
 
     @GetMapping("/findByVague")
-    public Map<String,Object> findByVague(String typeName){return new returnMap().returnMap(gametypeAut.findByVague(typeName));}
+    public Map<String,Object> findByVague(String typeName){return new returnMap().returnMap(200,gametypeAut.findByVague(typeName));}
 }

@@ -2,4 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.forumserve.dao.couectDao">
     <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <insert id="addCouect" parameterType="couect">
+<!-- 添加收藏-->
+        INSERT INTO `forundb`.`couect`(`userId`, `titleId`, `couectTime`) VALUES ( #{userId}, #{titleId}, #{couectTime});
+    </insert>
+    <!-- 判断是否收藏-->
+    <select id="stateOfJudgment" parameterType="couect" resultType="couect">
+        select * from couect where userId=#{userId} and titleId=#{titleId}
+    </select>
+    <!-- 删除收藏-->
+    <delete id="delCouect" parameterType="couect">
+        delete from couect where userId=#{userId} and titleId=#{titleId}
+    </delete>
+
 </mapper>

@@ -44,7 +44,7 @@ where t.gameId=1 GROUP BY t.titleId
                  LEFT JOIN fouow  f on f.userId=#{userId} and f.beuser=t.userId
                  LEFT JOIN couect  c on c.userId=#{userId} and c.titleId=t.titleId
                  LEFT JOIN thumbs  th on th.userId=#{userId} and bethumbsTypeId=0 and th.bethumbsId=t.titleId
-        where t.gameId=#{gameId} GROUP BY t.titleId
+        where t.gameId=#{gameId} and t.userId=u.userId GROUP BY t.titleId
     </select>
 
     <resultMap id="recommendedMap" type="recommendedUser">

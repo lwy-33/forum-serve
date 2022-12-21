@@ -4,7 +4,7 @@ public class game {
     private Integer gameId;
     private String gameName;
     private Integer gameTyoeId;
-    private Integer gameIcon;
+    private String gameIcon;
     private String by1;
     private String by2;
     private String by3;
@@ -46,11 +46,11 @@ public class game {
         this.gameTyoeId = gameTyoeId;
     }
 
-    public Integer getGameIcon() {
+    public String getGameIcon() {
         return gameIcon;
     }
 
-    public void setGameIcon(Integer gameIcon) {
+    public void setGameIcon(String gameIcon) {
         this.gameIcon = gameIcon;
     }
 
@@ -78,7 +78,7 @@ public class game {
         this.by3 = by3;
     }
 
-    public game(Integer gameId, String gameName, Integer gameTyoeId, Integer gameIcon, String by1, String by2, String by3) {
+    public game(Integer gameId, String gameName, Integer gameTyoeId, String gameIcon, String by1, String by2, String by3) {
         this.gameId = gameId;
         this.gameName = gameName;
         this.gameTyoeId = gameTyoeId;

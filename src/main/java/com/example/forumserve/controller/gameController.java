@@ -34,7 +34,7 @@ public class gameController {
     }
 
     @GetMapping("/findByVague")
-    public Map<String,Object> findByVague(String gameName,Integer gameTypeId){return new returnMap().returnMap(gameAut.findByVague(gameName,gameTypeId));}
+    public Map<String,Object> findByVague(String gameName,Integer gameTypeId){return new returnMap().returnMap(200,gameAut.findByVague(gameName,gameTypeId));}
 
     @GetMapping("/delGameById")
     public Map<String,Object> delGameById(Integer gameId){

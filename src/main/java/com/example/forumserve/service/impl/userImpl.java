@@ -64,5 +64,10 @@ public class userImpl implements userService {
         userAut.updateUser(user);
     }
 
+    @Override
+    public user userByUserId(Integer userId) {
+        return userAut.userByUserId(userId);
+    }
+
 
 }
