@@ -19,5 +19,9 @@ public interface userService {
     public void delUserById(Integer userId);
     public void addUser(user user) throws NoSuchAlgorithmException;
     public void updateUser(user user) throws NoSuchAlgorithmException;
+    public user findById(Integer userId);
+    public void register(user user) throws NoSuchAlgorithmException;
+    public user findByUserName(String username);
+    public void modifyPassword(user user) throws NoSuchAlgorithmException;
     public user userByUserId(Integer userId);
 }

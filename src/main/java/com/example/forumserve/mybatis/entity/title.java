@@ -16,20 +16,25 @@ public class title {
     private Integer commentCount;
     private Integer thumbsCount;
     private Integer by3;
+    private user userInfo;
+    private game gameInfo;
 
-    @Override
-    public String toString() {
-        return "title{" +
-                "titleId=" + titleId +
-                ", titleName='" + titleName + '\'' +
-                ", titleContent='" + titleContent + '\'' +
-                ", userId=" + userId +
-                ", gameId=" + gameId +
-                ", releaseTime=" + releaseTime +
-                ", commentCount='" + commentCount + '\'' +
-                ", thumbsCount=" + thumbsCount +
-                ", by3=" + by3 +
-                '}';
+    public title() {
+
+    }
+
+    public title(Integer titleId, String titleName, String titleContent, Integer userId, Integer gameId, Date releaseTime, Integer commentCount, Integer thumbsCount, Integer by3, user userInfo, game gameInfo) {
+        this.titleId = titleId;
+        this.titleName = titleName;
+        this.titleContent = titleContent;
+        this.userId = userId;
+        this.gameId = gameId;
+        this.releaseTime = releaseTime;
+        this.commentCount = commentCount;
+        this.thumbsCount = thumbsCount;
+        this.by3 = by3;
+        this.userInfo = userInfo;
+        this.gameInfo = gameInfo;
     }
 
     public Integer getTitleId() {
@@ -104,18 +109,36 @@ public class title {
         this.by3 = by3;
     }
 
-    public title() {
+    public user getUserInfo() {
+        return userInfo;
     }
 
-    public title(Integer titleId, String titleName, String titleContent, Integer userId, Integer gameId, Date releaseTime, Integer commentCount, Integer thumbsCount, Integer by3) {
-        this.titleId = titleId;
-        this.titleName = titleName;
-        this.titleContent = titleContent;
-        this.userId = userId;
-        this.gameId = gameId;
-        this.releaseTime = releaseTime;
-        this.commentCount = commentCount;
-        this.thumbsCount = thumbsCount;
-        this.by3 = by3;
+    public void setUserInfo(user userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    public game getGameInfo() {
+        return gameInfo;
+    }
+
+    public void setGameInfo(game gameInfo) {
+        this.gameInfo = gameInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "title{" +
+                "titleId=" + titleId +
+                ", titleName='" + titleName + '\'' +
+                ", titleContent='" + titleContent + '\'' +
+                ", userId=" + userId +
+                ", gameId=" + gameId +
+                ", releaseTime=" + releaseTime +
+                ", commentCount=" + commentCount +
+                ", thumbsCount=" + thumbsCount +
+                ", by3=" + by3 +
+                ", userInfo=" + userInfo +
+                ", gameInfo=" + gameInfo +
+                '}';
     }
 }

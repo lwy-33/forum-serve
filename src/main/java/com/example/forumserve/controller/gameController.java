@@ -1,7 +1,6 @@
 package com.example.forumserve.controller;
 
 import com.example.forumserve.mybatis.entity.game;
-import com.example.forumserve.mybatis.entity.gametype;
 import com.example.forumserve.service.Service.gameService;
 import com.example.forumserve.utils.returnMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,9 @@ public class gameController {
     }
 
     @GetMapping("/findByVague")
-    public Map<String,Object> findByVague(String gameName,Integer gameTypeId){return new returnMap().returnMap(200,gameAut.findByVague(gameName,gameTypeId));}
+    public Map<String,Object> findByVague(String gameName,Integer gameTypeId){
+        return new returnMap().returnMap(200,gameAut.findByVague(gameName,gameTypeId));
+    }
 
     @GetMapping("/delGameById")
     public Map<String,Object> delGameById(Integer gameId){

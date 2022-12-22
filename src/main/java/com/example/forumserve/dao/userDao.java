@@ -20,5 +20,10 @@ public interface userDao {
     public user idGetUser(Integer id);
     public void addUser(user user);
     public void updateUser(user user);
+    public user findById(Integer userId);
+    public void register(user user);
+    public user findByUserName(String username);
+    public user findByUserId(Integer userId);
+    public void modifyPassword(user user);
     public user userByUserId(Integer userId);
 }

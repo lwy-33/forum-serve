@@ -14,4 +14,5 @@ public interface gameDao {
     public void addGame(game game);
     public void updateGame(game game);
     public void delGameByIds(List<Integer> gameIds);
+    public game findById(Integer gameId);
 }

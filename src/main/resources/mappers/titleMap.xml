@@ -21,4 +21,56 @@
         UPDATE title set thumbsCount=thumbsCount-1 where titleId=#{titleId}
     </update>
 
+    <insert id="addTitle" parameterType="title">
+        insert into title(titleName,titleContent,userId,gameId,releaseTime,commentCount,thumbsCount) values (#{titleName},#{titleContent},#{userId},#{gameId},now(),0,0);
+    </insert>
+
+    <delete id="delTitleByIds" parameterType="Integer">
+        delete from title where titleId in
+        <foreach item="titleIds" collection="list" index="index" open="("
+                 separator="," close=")">
+            #{titleIds}
+        </foreach>
+    </delete>
+
+    <delete id="delTitleById" parameterType="Integer">
+        delete from title where titleId=#{titleId}
+    </delete>
+
+    <update id="updateTitle" parameterType="title">
+        update title set titleName=#{titleName},titleContent=#{titleContent},userId=#{userId},gameId=#{gameId},releaseTime=#{releaseTime},commentCount=#{commentCount},thumbsCount=#{thumbsCount} where titleId=#{titleId}
+    </update>
+
+    <resultMap id="titleResultMap" type="title">
+        <id property="titleId" column="titleId"/>
+        <result property="titleName" column="titleName"/>
+        <result property="titleContent" column="titleContent"/>
+        <result property="userId" column="userId"/>
+        <result property="gameId" column="gameId"/>
+        <result property="releaseTime" column="releaseTime"/>
+        <result property="commentCount" column="commentCount"/>
+        <result property="thumbsCount" column="thumbsCount"/>
+        <association property="userInfo" column="userId" select="com.example.forumserve.dao.userDao.findByUserId"/>
+        <association property="gameInfo" column="gameId" select="com.example.forumserve.dao.gameDao.findById"/>
+    </resultMap>
+
+    <select id="findAllTitleByPage" resultMap="titleResultMap" parameterType="Integer">
+        select * from title
+        <where>
+            <if test="titleName!=null and titleName!=''">
+                and titleName like "%"#{titleName}"%"
+            </if>
+            <if test="userId!=null and userId!=''">
+                and userId = #{userId}
+            </if>
+            <if test="gameId!=null and gameId!=''">
+                and gameId = #{gameId}
+            </if>
+        </where>
+        limit #{curPage},#{pageSize}
+    </select>
+
+    <select id="getAllTitleCount" resultType="Integer">
+        select count(*) from title
+    </select>
 </mapper>

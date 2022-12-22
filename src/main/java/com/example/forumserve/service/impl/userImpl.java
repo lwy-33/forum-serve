@@ -69,5 +69,29 @@ public class userImpl implements userService {
         return userAut.userByUserId(userId);
     }
 
+    @Override
+    public user findById(Integer userId) {
+        return userAut.findById(userId);
+    }
+
+    @Override
+    public void register(user user) throws NoSuchAlgorithmException {
+        md5Util md5=new md5Util();
+        user.setPassword(md5.md5Util(user.getUsername(),user.getPassword()));
+        userAut.register(user);
+    }
+
+    @Override
+    public user findByUserName(String username) {
+        return userAut.findByUserName(username);
+    }
+
+    @Override
+    public void modifyPassword(user user) throws NoSuchAlgorithmException {
+        md5Util md5=new md5Util();
+        user.setPassword(md5.md5Util(user.getUsername(),user.getPassword()));
+        userAut.modifyPassword(user);
+    }
+
 
 }

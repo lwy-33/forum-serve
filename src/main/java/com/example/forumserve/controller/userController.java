@@ -1,6 +1,8 @@
 package com.example.forumserve.controller;
 
 import cn.hutool.core.io.FileUtil;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.forumserve.utils.JWTUtil;
 import com.example.forumserve.utils.returnMap;
 import com.example.forumserve.mybatis.entity.user;
 import com.example.forumserve.service.Service.userService;
@@ -8,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -30,8 +34,28 @@ public class userController {
         return new returnMap().returnMap(200,userAut.seleAll());
     }
     @PostMapping("PasswordVerification")
-    public HashMap<String,Object> PasswordVerification(@RequestBody user da) throws NoSuchAlgorithmException {
-        return new returnMap().returnMap(200,userAut.PasswordVerification(da));
+    public Map<String,Object> PasswordVerification(@RequestBody user da) throws NoSuchAlgorithmException {
+        System.out.println(da);
+        Map<String,Object> map=new HashMap<>();
+        user u=userAut.PasswordVerification(da);
+        if(u!=null){
+            Map<String,String> payload=new HashMap<>();
+            payload.put("id",u.getUserId().toString());
+            payload.put("username",u.getUsername());
+            String token= JWTUtil.createToken(payload);
+            map.put("code",200);
+            map.put("msg","登陆成功");
+            map.put("token",token);
+            map.put("dataobject",u);
+        }else{
+            map.put("code",400);
+            map.put("msg","用户名户密码错误");
+            map.put("token",null);
+            map.put("userId",null);
+            map.put("username",null);
+        }
+        return map;
+        //return new returnMap().returnMap(200,userAut.PasswordVerification(da));
     }
 
     @GetMapping("/getAllUserByPage")
@@ -101,6 +125,7 @@ public class userController {
         os.flush();
         os.close();
     }
+
     @PostMapping("/editUser")
     public Map<String,Object> editUser(@RequestBody user user) throws NoSuchAlgorithmException {
         Map<String,Object> map=new HashMap<>();
@@ -115,6 +140,46 @@ public class userController {
         }
         return map;
     }
+
+    @GetMapping("/getUserInfo")
+    public Map<String,Object> getUserInfo(HttpServletRequest request){
+        Map<String,Object> map=new HashMap<>();
+        String token=request.getHeader("token");
+        DecodedJWT decodedJWT= JWTUtil.verifyToken(token);
+        String strId=decodedJWT.getClaim("id").asString();
+        int id=Integer.parseInt( strId);
+        user userInfo=userAut.findById(id);
+        map.put("code",200);
+        map.put("msg","查找用户信息成功");
+        map.put("dataobject",userInfo);
+        System.out.println("token:"+token);
+        return map;
+    }
+
+    @PostMapping("/register")
+    public Map<String,Object> register(@RequestBody user user) throws NoSuchAlgorithmException {
+        Map<String,Object> map=new HashMap<>();
+        if(userAut.findByUserName(user.getUsername())==null){
+            userAut.register(user);
+            map.put("code",200);
+            map.put("msg","注册成功");
+        }else {
+            map.put("code",200);
+            map.put("msg","该用户已存在");
+        }
+        return map;
+    }
+
+    @PostMapping("/modifyPassword")
+    public Map<String,Object> modifyPassword(@RequestBody user user) throws NoSuchAlgorithmException {
+        Map<String,Object> map=new HashMap<>();
+        userAut.modifyPassword(user);
+        map.put("code",200);
+        map.put("msg","修改密码成功");
+        map.put("dataobject",null);
+        return map;
+    }
+
     @GetMapping("userByUserId")
     public Map<String,Object> userByUserId(Integer userId){
 //        根据用户id获取用户信息

@@ -46,4 +46,8 @@
             #{gameIds}
         </foreach>
     </delete>
+
+    <select id="findById" resultType="game" parameterType="Integer">
+        select * from game where gameId=#{gameId}
+    </select>
 </mapper>

@@ -3,7 +3,7 @@ package com.example.forumserve.mybatis.entity;
 public class game {
     private Integer gameId;
     private String gameName;
-    private Integer gameTyoeId;
+    private Integer gameTypeId;
     private String gameIcon;
     private String by1;
     private String by2;
@@ -14,7 +14,7 @@ public class game {
         return "game{" +
                 "gameId=" + gameId +
                 ", gameName='" + gameName + '\'' +
-                ", gameTyoeId=" + gameTyoeId +
+                ", gameTypeId=" + gameTypeId +
                 ", gameIcon=" + gameIcon +
                 ", by1='" + by1 + '\'' +
                 ", by2='" + by2 + '\'' +
@@ -38,12 +38,12 @@ public class game {
         this.gameName = gameName;
     }
 
-    public Integer getGameTyoeId() {
-        return gameTyoeId;
+    public Integer getGameTypeId() {
+        return gameTypeId;
     }
 
-    public void setGameTyoeId(Integer gameTyoeId) {
-        this.gameTyoeId = gameTyoeId;
+    public void setGameTypeId(Integer gameTypeId) {
+        this.gameTypeId = gameTypeId;
     }
 
     public String getGameIcon() {
@@ -78,10 +78,10 @@ public class game {
         this.by3 = by3;
     }
 
-    public game(Integer gameId, String gameName, Integer gameTyoeId, String gameIcon, String by1, String by2, String by3) {
+    public game(Integer gameId, String gameName, Integer gameTypeId, String gameIcon, String by1, String by2, String by3) {
         this.gameId = gameId;
         this.gameName = gameName;
-        this.gameTyoeId = gameTyoeId;
+        this.gameTypeId = gameTypeId;
         this.gameIcon = gameIcon;
         this.by1 = by1;
         this.by2 = by2;
