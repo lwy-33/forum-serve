@@ -28,4 +28,19 @@ public class FileController {
         map.put("dataobject",gameIcon);
         return map;
     }
+
+    @PostMapping("/uploadFile1")
+    public Map<String,Object> uploadFile1(MultipartFile file) throws IOException{
+        String oldFileName=file.getOriginalFilename();
+        String newFileName= UUID.randomUUID().toString()+oldFileName;
+        String fileSavePath="D:/userImage/userImage/"+newFileName;
+        File f=new File(fileSavePath);
+        file.transferTo(f);
+        String userImage="http://localhost:8090/userImage/userImage/"+newFileName;
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",200);
+        map.put("msg","文件上传成功");
+        map.put("dataobject",userImage);
+        return map;
+    }
 }
